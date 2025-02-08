@@ -23,6 +23,7 @@ class Register extends StatefulWidget {
 class _Page extends State<Register> with TickerProviderStateMixin
 {
   bool hidePassword = true;
+  bool hidePasswordRetry = true;
   bool enablePostBtn = false;
   bool _showLogin = true;
   String _email = '';
@@ -89,9 +90,6 @@ class _Page extends State<Register> with TickerProviderStateMixin
     }
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -144,10 +142,10 @@ class _Page extends State<Register> with TickerProviderStateMixin
                       MyFormIconTextBox(hintText: 'Enter your email address', prefixIcon:Icons.email,  textInputType: TextInputType.emailAddress, onChanged:(){}),
                       MyFormIconTextBox(hintText: 'Enter your mobile number', prefixIcon:Icons.phone,  textInputType: TextInputType.phone, onChanged:(){}),
                       MyFormIconTextBox(hintText: 'Enter your TRN number', prefixIcon:Icons.person,  textInputType: TextInputType.number, onChanged:(){}),
-                      MyFormPasswordBox(hintText: 'Password', hidePassword: true, onChanged:(){}, iconTap: () {  },),
-                      MyFormPasswordBox(hintText: 'Enter password again', hidePassword: true, onChanged:(){}, iconTap: () {  },),
+                      MyFormPasswordBox(hintText: 'Password', hidePassword: hidePassword, onChanged:(){}, iconTap: () { setState(() { hidePassword = !hidePassword; });  }),
+                      MyFormPasswordBox(hintText: 'Enter password again', hidePassword: hidePasswordRetry, onChanged:(){}, iconTap: () { setState(() { hidePasswordRetry = !hidePasswordRetry; }); }),
                       SizedBox(height:35),
-                      MyPostButton(text: 'Create Account', colorStyle:0, onPressed: () { print('fdgfd');  }),
+                      MyPostButton(text: 'Create Account', colorStyle:0, onPressed: () { }),
                       SizedBox(height:40)
                     ],
                   ),
