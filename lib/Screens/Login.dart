@@ -35,6 +35,7 @@ class _Page extends State<Login> with TickerProviderStateMixin
   late StreamController<String> recoverEmailStreamController;
   TextEditingController recoverEmailController = TextEditingController();
 
+  bool _checkValue = false;
   bool hidePassword = true;
   bool enablePostBtn = false;
   bool _showLogin = true;
@@ -158,7 +159,43 @@ class _Page extends State<Login> with TickerProviderStateMixin
                       // ),
                       MyFormIconTextBox(hintText: 'Enter your email address', prefixIcon:Icons.email,  textInputType: TextInputType.emailAddress, onChanged:(){}),
                       MyFormPasswordBox(hintText: 'Enter your password', hidePassword: true, onChanged:(){}, iconTap: () {  }),
-                      SizedBox(height:50),
+                      // Row(
+                      //   children: [
+                      //     Checkbox(value: _checkValue,
+                      //       onChanged:(newCheckValue){
+                      //         setState(() {
+                      //           print(newCheckValue);
+                      //           _checkValue=!_checkValue;
+                      //         });
+                      //       }
+                      //     ),
+                      //     Text('Remember Me?', style: TextStyle(fontSize:14, color: Colors.black, fontWeight:FontWeight.bold)),
+                      //   ],
+                      // ),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _checkValue=!_checkValue;
+                          });
+                        },
+                        child: Row(
+                          children: [
+                            Checkbox(
+                              value: _checkValue,
+                              onChanged: (bool? newCheckValue) {
+                                setState(() {
+                                  _checkValue=!_checkValue;
+                                });
+                              },
+                            ),
+                            Text(
+                              'Remember me!',
+                              style: TextStyle(fontSize:14, color: _checkValue ? Colors.blue : Colors.grey, fontWeight:FontWeight.bold)
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height:20),
                       MyPostButton(text: 'Login', colorStyle:0, onPressed: () {
                         Navigator.pushReplacement(context,
                           MaterialPageRoute(builder: (context) => const AccountHome()),);
@@ -168,7 +205,7 @@ class _Page extends State<Login> with TickerProviderStateMixin
                       Column(
                         children: [
                           InkWell(
-                            child: Text('Open Account', style: TextStyle(fontSize:14, color: Colors.black, fontWeight:FontWeight.bold)),
+                            child: Text('Open Account', style: TextStyle(fontSize:14, color: Colors.grey, fontWeight:FontWeight.bold)),
                             onTap: (){
                               Navigator.push(context,
                                 MaterialPageRoute(builder: (context) => const Register()),
@@ -176,16 +213,9 @@ class _Page extends State<Login> with TickerProviderStateMixin
                             },
                           ),
                           SizedBox(height:10),
-                          Text('Forget Password?', style: TextStyle(fontSize:14, color: Colors.black, fontWeight:FontWeight.bold)),
-                          //Checkbox(value: true, onChanged:(newValue){}),
-                          //Text('Remember Me?', style: TextStyle(fontSize:14, color: Colors.black, fontWeight:FontWeight.bold)),
+                          Text('Forget Password?', style: TextStyle(fontSize:14, color: Colors.grey, fontWeight:FontWeight.bold)),
                         ],
                       ),
-                      // MyPostButton(text: 'Open an Account', colorStyle:3, onPressed: () {
-                      //   Navigator.push(context,
-                      //     MaterialPageRoute(builder: (context) => const Register()),
-                      //   );
-                      // })
                     ],
                   ),
                 );
