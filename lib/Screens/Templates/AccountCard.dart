@@ -1,7 +1,17 @@
 import 'package:flutter/material.dart';
 import '../../Common/MyColors.dart';
 import '../../Common/MyStyles.dart';
-import '../NewsDetails.dart';
+import '../AccountInfo.dart';
+
+class AccountSummary{
+  final String accountValue;
+  final String accountNumber;
+
+  AccountSummary({
+    required this.accountValue,
+    required this.accountNumber
+  });
+}
 
 class AccountCard extends StatelessWidget{
   final int pageNumber;
@@ -18,13 +28,19 @@ class AccountCard extends StatelessWidget{
     double screenWidth = size.width;
     double safePaddingTop = MediaQuery.of(context).padding.top;
 
+    final List<AccountSummary> accountSummary = [
+      AccountSummary(accountNumber: '***9090$pageNumber', accountValue: 'JMD \$4,500.72'),
+      AccountSummary(accountNumber: '***5678$pageNumber', accountValue: 'JMD \$12,123.12'),
+      AccountSummary(accountNumber: '***1214$pageNumber', accountValue: 'JMD \$1,0091.02')
+    ];
+
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),
       child: InkWell(
         onTap: (){
-          // Navigator.push(context,
-          //   MaterialPageRoute(builder: (context) => const NewsDetails()),
-          // );
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AccountInfo()),
+          );
         },
         child: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -32,7 +48,7 @@ class AccountCard extends StatelessWidget{
             children: [
               Container(
                 width: screenWidth,
-                height: 200,
+                height: 200,//Color(0xFF3365ff)
                 decoration: BoxDecoration(color: Color(0xFF3365ff)),
                 child: Padding(
                   padding: const EdgeInsets.all(12),
@@ -40,15 +56,21 @@ class AccountCard extends StatelessWidget{
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('FEB 32. 2025', style: MyStyles.headerStyle1.copyWith(fontSize: 24)),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('Account at', style: MyStyles.headerStyle2.copyWith(fontSize: 12)),
+                          Text('FEB 32. 2025', style: MyStyles.headerStyle1.copyWith(fontSize: 24))
+                        ],
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text('Asset Value', style: MyStyles.headerStyle2.copyWith(fontSize: 12)),
-                          Text('JMD \$400,000,000.00', style: MyStyles.headerStyle1.copyWith(fontSize: 24, color: MyColors.appAccentColor))
+                          Text(accountSummary[pageNumber].accountValue, style: MyStyles.headerStyle1.copyWith(fontSize: 24, color: MyColors.appAccentColor))
                         ],
                       ),
-                      Text('***9090$pageNumber', style: MyStyles.headerStyle1.copyWith(fontSize: 16)),
+                      Text(accountSummary[pageNumber].accountNumber, style: MyStyles.headerStyle1.copyWith(fontSize: 16)),
                     ],
                   ),
                 ),

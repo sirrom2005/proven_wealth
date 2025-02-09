@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:proven_wealth/Screens/AccountDetail.dart';
 import 'package:proven_wealth/Screens/AccountHome.dart';
+import 'package:proven_wealth/Screens/AccountInfo.dart';
 import '../Services/page_manager.dart';
 import '../Services/service_locator.dart';
 import 'Login.dart';
@@ -37,7 +39,9 @@ class Page extends State<Accounts>{
       routes: {
         //PageSelector.id: (context) => const PageSelector(),
         Login.id: (context) => const Login(),
-        AccountHome.id: (context) => const AccountHome()
+        AccountHome.id: (context) => const AccountHome(),
+        AccountInfo.id: (context) => const AccountInfo(),
+        AccountDetail.id: (context) => const AccountDetail()
       }
     );
   }

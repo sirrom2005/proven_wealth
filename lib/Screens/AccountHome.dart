@@ -60,7 +60,7 @@ class Page extends State<AccountHome>{
   void initState() {
     super.initState();
 
-    pageManager.chartDataNotifier.value = _chartData[1];
+    pageManager.chartDataNotifier.value = _chartData[0];
   }
 
   final List<AccountMenu> _accountMenuList = [
@@ -116,7 +116,7 @@ class Page extends State<AccountHome>{
                                   pageManager.chartDataNotifier.value = _chartData[index];
                                 }
                               ),
-                              items: [1,2,3].map((i) {
+                              items: [0,1,2].map((i) {
                                 return Builder(
                                   builder: (BuildContext context) {
                                     return AccountCard(pageNumber:i);

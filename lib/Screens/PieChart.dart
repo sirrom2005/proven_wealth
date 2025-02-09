@@ -44,14 +44,11 @@ class PieChart2State extends State<MyPieChartData> {
                         touchedIndex = -1;
                         return;
                       }
-                      touchedIndex = pieTouchResponse
-                          .touchedSection!.touchedSectionIndex;
+                      touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
                     });
                   },
                 ),
-                borderData: FlBorderData(
-                  show: false,
-                ),
+                borderData: FlBorderData( show: false ),
                 sectionsSpace: 5,
                 centerSpaceRadius: 30,
                 sections: showingSections(),
