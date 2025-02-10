@@ -40,10 +40,10 @@ class NewsHeader extends StatelessWidget{
                   height: 110,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
-                      begin: Alignment.topCenter, // Start point of the gradient
-                      end: Alignment.bottomCenter, // End point of the gradient
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
                       colors: [
-                        MyColors.black.withAlpha(0), // Semi-transparent black overlay
+                        MyColors.black.withAlpha(0),
                         MyColors.black.withAlpha(255),
                       ],
                     ),
@@ -56,7 +56,7 @@ class NewsHeader extends StatelessWidget{
                       children: [
                         SizedBox(
                           width: screenWidth*0.8,
-                          child: Text('The cow jump over the moon', style: MyStyles.headerStyle1.copyWith(fontSize: 24, height:1.1))
+                          child: Text('The cow jump over the moon', style: MyStyles.headerStyle1.copyWith(fontSize: 24, color: MyColors.white, height:1.1))
                         ),
                         SizedBox(height:5),
                         Text('June 12, 2025', style: MyStyles.headerStyle2.copyWith(fontSize: 12)),
