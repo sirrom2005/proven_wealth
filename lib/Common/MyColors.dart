@@ -6,6 +6,7 @@ class MyColors{
   static const Color white = Color(0xFFFFFFFF);
   static const Color black = Color(0xFF000000);
   static const Color blue = Color(0xFF153966);
+  static const Color lightGray = Color(0xFFececec);
 
   static const Color orange = Color(0xFFfd8902);
   static const Color playerBackGroundColor = Color(0x000000AD);
@@ -30,7 +31,6 @@ class MyColors{
   static const Color lightRed = Color(0xF8FCE1E2);
   static const Color disableBtn = Color(0xFFc2e1d5);
   static const Color lightGreen = Color(0xFFe9f3eb);
-  static const Color lightGray = Color(0xFFececec);
   static const Color backGroundLightGray = Color(0xfff6f6f6);
   static const Color grayBtn = Color(0xffF4F4F4);
   static const Color greyText = Colors.black54;
