@@ -65,4 +65,32 @@ class MyAppBar
         ),
       );
   }
+
+  getSliverAppBar(double screenHeight){
+    return
+      SliverAppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
+        expandedHeight: screenHeight*.25,
+        pinned: true,
+        stretch: true,
+        backgroundColor: MyColors.black,
+        flexibleSpace: FlexibleSpaceBar(
+            background: Container(
+              color: MyColors.white,
+              child: ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomRight: Radius.circular(70.0), // Adjust the radius as needed
+                  ),
+                  child: Image.asset('lib/assets/images/img3.jpg',
+                      alignment: Alignment.bottomCenter,
+                      fit: BoxFit.cover
+                  )
+              ),
+            ),
+            title: Image.asset('lib/assets/images/logo.png', width: 120),
+            centerTitle: false,
+            titlePadding: EdgeInsets.fromLTRB(15, 0, 0, 5)
+        ),
+      );
+  }
 }
