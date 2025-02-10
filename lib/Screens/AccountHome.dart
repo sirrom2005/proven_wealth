@@ -2,11 +2,14 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:proven_wealth/Common/MyStyles.dart';
+import 'package:proven_wealth/Screens/AccountInfo.dart';
+import 'package:proven_wealth/Screens/Events.dart';
 import '../Common/CommonText.dart';
 import '../Common/MyColors.dart';
 import '../Models/ChartData.dart';
 import '../Services/page_manager.dart';
 import '../Services/service_locator.dart';
+import 'Loan.dart';
 import 'PieChart.dart';
 import 'Templates/AccountCard.dart';
 import 'Templates/AppBar.dart';
@@ -22,11 +25,13 @@ class AccountHome extends StatefulWidget {
 class AccountMenu{
   final String menu;
   final IconData icon;
+  final Widget action;
 
   AccountMenu(
     {
       required this.menu,
-      required this.icon
+      required this.icon,
+      required this.action
     }
   );
 }
@@ -40,7 +45,7 @@ class Page extends State<AccountHome>{
       ChartData(index: 1, title: 'Cash', color: Colors.red, chartTitle: '20%', chartValue:20 ),
       ChartData(index: 2, title: 'Equity', color: Colors.green.shade900, chartTitle: '12%', chartValue:12 ),
       ChartData(index: 3, title: 'ForEx', color: Colors.blue.shade900, chartTitle: '5%', chartValue:5 ),
-      ChartData(index: 4, title: 'Unit Trust', color: Colors.green.shade500, chartTitle: '10%', chartValue:10 ),
+      ChartData(index: 4, title: 'Unit Trust', color: Colors.purpleAccent, chartTitle: '10%', chartValue:10 ),
       ChartData(index: 5, title: 'Proven Rock', color: Colors.orange, chartTitle: '30%', chartValue:30 ),
       ChartData(index: 6, title: 'Margin Loans', color: Colors.teal, chartTitle: '15%', chartValue:15 ),
     ],
@@ -64,10 +69,10 @@ class Page extends State<AccountHome>{
   }
 
   final List<AccountMenu> _accountMenuList = [
-    AccountMenu(menu: 'Portfolio', icon: Icons.abc ),
-    AccountMenu(menu: 'Loans', icon: Icons.abc ),
-    AccountMenu(menu: 'Orders\n&\nRequest', icon: Icons.abc ),
-    AccountMenu(menu: 'Income\nCalendar', icon: Icons.abc )
+    AccountMenu(menu: 'Portfolio', icon: Icons.abc, action: const AccountInfo() ),
+    AccountMenu(menu: 'Loans', icon: Icons.abc, action: const Loan() ),
+    AccountMenu(menu: 'Orders\n&\nRequest', icon: Icons.abc, action: const Loan() ),
+    AccountMenu(menu: 'Income\nCalendar', icon: Icons.abc, action: const Events() )
   ];
 
   Future<String> fetchUserData() async {
@@ -84,7 +89,6 @@ class Page extends State<AccountHome>{
     Size size = MediaQuery.of(context).size;
     double screenWidth = size.width;
     double screenHeight = size.height;
-    double safePaddingTop = MediaQuery.of(context).padding.top;
 
     return Scaffold(
         key: scaffoldKey,
@@ -100,109 +104,145 @@ class Page extends State<AccountHome>{
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
-                      height: screenHeight,
+                      //height: screenHeight,
                       child: Padding(
                         padding: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                         child:Stack(
                           children: [
-                            CarouselSlider(
-                              carouselController: carouselController,
-                              options: CarouselOptions(
-                                autoPlay: false,
-                                enlargeCenterPage: true,
-                                viewportFraction: 0.8,
-                                height: 200,
-                                onPageChanged:(index, reason){
-                                  pageManager.chartDataNotifier.value = _chartData[index];
-                                }
-                              ),
-                              items: [0,1,2].map((i) {
-                                return Builder(
-                                  builder: (BuildContext context) {
-                                    return AccountCard(pageNumber:i);
-                                  },
-                                );
-                              }).toList(),
-                            ),
-                            Positioned(
-                              top: 220,
-                              bottom: 0,
-                              child: Container(
-                                width: screenWidth,
-                                decoration: BoxDecoration(
-                                  color: MyColors.appAccentColor,
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(CommonText.borderRadius),
-                                    topLeft: Radius.circular(CommonText.borderRadius)
+                            Column(
+                              children: [
+                                CarouselSlider(
+                                  carouselController: carouselController,
+                                  options: CarouselOptions(
+                                    autoPlay: false,
+                                    enlargeCenterPage: true,
+                                    viewportFraction: 0.8,
+                                    height: 200,
+                                    onPageChanged:(index, reason){
+                                      pageManager.chartDataNotifier.value = _chartData[index];
+                                    }
                                   ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.black.withAlpha(50), // Shadow color
-                                      spreadRadius: 1, // How much the shadow should spread
-                                      blurRadius: 3, // How blurry the shadow should be
-                                      offset: const Offset(5, -4), // Offset of the shadow from the container
-                                    ),
-                                  ],
+                                  items: [0,1,2].map((i) {
+                                    return Builder(
+                                      builder: (BuildContext context) {
+                                        return AccountCard(pageNumber:i);
+                                      },
+                                    );
+                                  }).toList(),
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(20,30,20,60),
-                                  child: Wrap(
-                                      children: _accountMenuList.map((ele) =>
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(5, 0, 0, 0),
-                                            child: SizedBox(
-                                              height:85,
-                                              width:85,
-                                              child: MaterialButton(
-                                                elevation: 0,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius: BorderRadius.circular(15.0),
-                                                  side: BorderSide(color: MyColors.black, width: 1)
-                                                ),
-                                                color: Colors.white,
-                                                onPressed: () {
-                                                },
-                                                child: Center(
-                                                  child: Row(
-                                                    mainAxisAlignment: MainAxisAlignment.center,
-                                                    children: [
-                                                      Text(ele.menu, textAlign: TextAlign.center, style:TextStyle(color: MyColors.black, fontWeight: FontWeight.bold, fontSize: 11)),
-                                                    ],
+                                SizedBox(height: 15),
+                                Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: MyColors.appAccentColor,
+                                    borderRadius: BorderRadius.all(Radius.circular(30)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.fromLTRB(0, 15, 0, 0),
+                                    child: Column(
+                                      children: [
+                                        Wrap(
+                                            alignment: WrapAlignment.center,
+                                            children: _accountMenuList.map((ele) =>
+                                                Padding(
+                                                  padding: const EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                                  child: SizedBox(
+                                                    height:85,
+                                                    width:85,
+                                                    child: MaterialButton(
+                                                      elevation: 0,
+                                                      color: MyColors.white,
+                                                      shape: RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.circular(15.0),
+                                                          side: BorderSide(color: MyColors.black, width: 1)
+                                                      ),
+                                                      child: Center(
+                                                        child: Row(
+                                                          mainAxisAlignment: MainAxisAlignment.center,
+                                                          children: [
+                                                            Text(ele.menu, textAlign: TextAlign.center, style:TextStyle(color: MyColors.black, fontWeight: FontWeight.bold, fontSize: 11)),
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      onPressed: () {
+                                                        Navigator.push(context,
+                                                          MaterialPageRoute(builder: (context) => ele.action),
+                                                        );
+                                                      },
+                                                    ),
                                                   ),
                                                 )
-                                              ),
+                                            ).toList()
+                                        ),
+                                        SizedBox(height: 20),
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                                          child: Container(
+                                            width: screenWidth,
+                                            decoration: BoxDecoration(
+                                              color: MyColors.white,
+                                              borderRadius: BorderRadius.all(Radius.circular(CommonText.borderRadius))
                                             ),
-                                          )
-                                      ).toList()
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Positioned(
-                              top: 355,
-                              left: 15,
-                              right: 15,
-                              child: Container(
-                                width: screenWidth,
-                                decoration: BoxDecoration(
-                                  color: MyColors.white,
-                                  borderRadius: BorderRadius.all(Radius.circular(CommonText.borderRadius))
-                                ),
-                                child: Column(
-                                  children: [
-                                    SizedBox(height: 20),
-                                    Text('Capital Summary', style: MyStyles.headerStyle1.copyWith(color: Colors.black)),
-                                    ValueListenableBuilder<List<ChartData>>(
-                                      valueListenable: pageManager.chartDataNotifier,
-                                      builder: (_, value, __) {
-                                        return MyPieChartData(pieChartData: value);
-                                      }
+                                            child: Column(
+                                              children: [
+                                                SizedBox(height: 20),
+                                                Text('Capital Summary', style: MyStyles.headerStyle1.copyWith(color: Colors.black)),
+                                                ValueListenableBuilder<List<ChartData>>(
+                                                  valueListenable: pageManager.chartDataNotifier,
+                                                  builder: (_, value, __) {
+                                                    return MyPieChartData(pieChartData: value);
+                                                  }
+                                                ),
+                                                SizedBox(height:30)
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
-                                    SizedBox(height:20)
-                                  ],
-                                ),
-                              ),
+                                  ),
+                                )
+                              ],
                             ),
+                            // Positioned(
+                            //   top: 330,
+                            //   bottom: 0,
+                            //   child: Container(
+                            //     width: screenWidth,
+                            //     decoration: BoxDecoration(
+                            //       color: MyColors.appAccentColor,
+                            //       borderRadius: BorderRadius.only(
+                            //         topRight: Radius.circular(CommonText.borderRadius),
+                            //         topLeft: Radius.circular(CommonText.borderRadius)
+                            //       )
+                            //     )
+                            //   ),
+                            // ),
+                            // Positioned(
+                            //   top: 355,
+                            //   left: 15,
+                            //   right: 15,
+                            //   child: Container(
+                            //     width: screenWidth,
+                            //     decoration: BoxDecoration(
+                            //       color: MyColors.white,
+                            //       borderRadius: BorderRadius.all(Radius.circular(CommonText.borderRadius))
+                            //     ),
+                            //     child: Column(
+                            //       children: [
+                            //         SizedBox(height: 20),
+                            //         Text('Capital Summary', style: MyStyles.headerStyle1.copyWith(color: Colors.black)),
+                            //         ValueListenableBuilder<List<ChartData>>(
+                            //           valueListenable: pageManager.chartDataNotifier,
+                            //           builder: (_, value, __) {
+                            //             return MyPieChartData(pieChartData: value);
+                            //           }
+                            //         ),
+                            //         SizedBox(height:520)
+                            //       ],
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
                       ),

@@ -67,12 +67,16 @@ class Page extends State<AccountDetail>{
             progressIndicator: const CircularProgressIndicator(),
             child: SafeArea(
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text('Account Detail'),
-                    Text('Accounts 1'),
-                  ],
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Center(child: Text('Equity',style: MyStyles.headerStyle1)),
+                      Text('Some random info here', style: MyStyles.headerStyle2),
+                      Text('\$ 3,000.23', style: MyStyles.headerStyle1),
+                    ],
+                  ),
                 )
               ),
             )
