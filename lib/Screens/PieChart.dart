@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import '../Models/ChartData.dart';
+import 'AccountDetail.dart';
 
 int touchedIndex = -1;
 
@@ -27,53 +28,48 @@ class PieChart2State extends State<MyPieChartData> {
   @override
   Widget build(BuildContext context) {
     chartData = widget.pieChartData;
-
-    return AspectRatio(
-      aspectRatio: 1,
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: PieChart(
-              PieChartData(
-                pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                    setState(() {
-                      if (!event.isInterestedForInteractions ||
-                          pieTouchResponse == null ||
-                          pieTouchResponse.touchedSection == null) {
-                        touchedIndex = -1;
-                        return;
-                      }
-                      touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
-                    });
-                  },
-                ),
-                borderData: FlBorderData( show: false ),
-                sectionsSpace: 5,
-                centerSpaceRadius: 30,
-                sections: showingSections(),
+    return Column(
+      children: <Widget>[
+        //Text('data')
+        SizedBox(
+          height:190,
+          width: double.infinity,
+          child: PieChart(
+            PieChartData(
+              pieTouchData: PieTouchData(
+                touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                  setState(() {
+                    if (!event.isInterestedForInteractions ||
+                        pieTouchResponse == null ||
+                        pieTouchResponse.touchedSection == null) {
+                      touchedIndex = -1;
+                      return;
+                    }
+                    touchedIndex = pieTouchResponse.touchedSection!.touchedSectionIndex;
+                  });
+                },
               ),
+              borderData: FlBorderData( show: false ),
+              sectionsSpace: 5,
+              centerSpaceRadius: 30,
+              sections: showingSections(),
             ),
           ),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+        ),
+        SizedBox(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.center,
             children: chartData.map((ele) =>
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 0, 0, 4),
-                child: Indicator(
-                  color: ele.color,
-                  text: ele.title,
-                  isSquare: false,
-                ),
+              Indicator(
+                color: ele.color,
+                text: ele.title,
+                isSquare: false,
               )
             ).toList()
           ),
-          const SizedBox(
-            width: 28,
-          ),
-        ],
-      ),
+        )
+      ],
     );
   }
 
@@ -121,40 +117,40 @@ class Indicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        OutlinedButton(
-          onPressed: () {  },
-          style: ButtonStyle(
-            alignment: Alignment.centerLeft,
-            visualDensity: VisualDensity.comfortable
-          ),
-          child: Row(
-            children: [
-              Container(
-                width: size,
-                height: size,
-                decoration: BoxDecoration(
-                  shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
-                  color: color,
-                ),
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+      child: OutlinedButton(
+        style: ButtonStyle(
+          alignment: Alignment.centerLeft,
+          visualDensity: VisualDensity.comfortable
+        ),
+        child: Wrap(
+          children: [
+            Container(
+              width: size,
+              height: size,
+              decoration: BoxDecoration(
+                shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
+                color: color,
               ),
-              const SizedBox(width: 4),
-              SizedBox(
-                width: 100,
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: textColor,
-                  ),
-                ),
+            ),
+            const SizedBox(width: 4),
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
+                color: textColor,
               ),
-            ],
-          ),
-        )
-      ],
+            )
+          ],
+        ),
+        onPressed: () {
+          Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AccountDetail()),
+          );
+        },
+      ),
     );
   }
 }
