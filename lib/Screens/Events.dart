@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 
 import '../Common/MyColors.dart';
+import '../Common/MyStyles.dart';
 import 'Templates/AppBar.dart';
 
 class Events extends StatefulWidget {
@@ -30,35 +31,10 @@ class Page extends State<Events>{
             progressIndicator: const CircularProgressIndicator(),
             child: CustomScrollView(
                 slivers: <Widget>[
-                  SliverAppBar(
-                    iconTheme: const IconThemeData(color: Colors.white),
-                    expandedHeight: screenHeight*.25,
-                    //floating: false,
-                    //snap:  false,
-                    pinned: true,
-                    stretch: true,
-                    backgroundColor: MyColors.black,
-                    flexibleSpace: FlexibleSpaceBar(
-                        background: Container(
-                          color: MyColors.white,
-                          child: ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                bottomRight: Radius.circular(70.0), // Adjust the radius as needed
-                              ),
-                              child: Image.asset('lib/assets/images/img3.jpg',
-                                  alignment: Alignment.bottomCenter,
-                                  fit: BoxFit.fitWidth
-                              )
-                          ),
-                        ),
-                        title: Image.asset('lib/assets/images/logo.png', width: 120),
-                        centerTitle: false,
-                        titlePadding: EdgeInsets.fromLTRB(15, 0, 0, 5)
-                    ),
-                  ),
+                  MyAppBar().getSliverAppBar(screenHeight),
                   SliverList(
                       delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                        return Text('Events');
+                        return Text('Events Coming Soon',style: MyStyles.headerStyle1.copyWith(color: MyColors.red));
                       },
                         childCount: 1,
                       )
