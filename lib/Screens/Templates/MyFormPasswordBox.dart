@@ -36,9 +36,6 @@ class MyFormPasswordBox extends StatelessWidget
               style: MyStyles.mediumTextStyle2,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.symmetric(vertical:20.0, horizontal:15.0),
-                // enabledBorder: OutlineInputBorder(
-                //   borderSide: BorderSide(color:borderColor, width:1.0)
-                // ),
                 hintText: hintText,
                 hintStyle: MyStyles.mediumTextStyle1.copyWith(fontSize: 14),
                 suffixIcon:IconButton(
