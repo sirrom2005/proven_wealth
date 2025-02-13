@@ -10,6 +10,7 @@ import '../Models/ChartData.dart';
 import '../Services/page_manager.dart';
 import '../Services/service_locator.dart';
 import 'Loan.dart';
+import 'OrdersAndRequest.dart';
 import 'PieChart.dart';
 import 'Templates/AccountCard.dart';
 import 'Templates/AppBar.dart';
@@ -41,6 +42,16 @@ class Page extends State<AccountHome>{
   final List<List<ChartData>> _chartData =
   [
     [
+      ChartData(index: 0, title: 'Cash', color: Colors.green, chartTitle: '25%', chartValue:25 ),
+      ChartData(index: 1, title: 'Unit Trust', color: Colors.blue, chartTitle: '15%', chartValue:15 ),
+      ChartData(index: 2, title: 'Margin Loans', color: Colors.pink, chartTitle: '10%', chartValue:25 ),
+      ChartData(index: 3, title: 'Proven Rock', color: Colors.orange, chartTitle: '30%', chartValue:35 ),
+    ],
+    [
+      ChartData(index: 0, title: 'Cash', color: Colors.green, chartTitle: '65%', chartValue:50 ),
+      ChartData(index: 1, title: 'Equity', color: Colors.blue, chartTitle: '65%', chartValue:50 )
+    ],
+    [
       ChartData(index: 0, title: 'Bond', color: Colors.green, chartTitle: '8%', chartValue:8 ),
       ChartData(index: 1, title: 'Cash', color: Colors.red, chartTitle: '20%', chartValue:20 ),
       ChartData(index: 2, title: 'Equity', color: Colors.green.shade900, chartTitle: '12%', chartValue:12 ),
@@ -48,16 +59,6 @@ class Page extends State<AccountHome>{
       ChartData(index: 4, title: 'Unit Trust', color: Colors.purpleAccent, chartTitle: '10%', chartValue:10 ),
       ChartData(index: 5, title: 'Proven Rock', color: Colors.orange, chartTitle: '30%', chartValue:30 ),
       ChartData(index: 6, title: 'Margin Loans', color: Colors.teal, chartTitle: '15%', chartValue:15 ),
-    ],
-    [
-      ChartData(index: 0, title: 'Cash', color: Colors.green, chartTitle: '65%', chartValue:50 ),
-      ChartData(index: 1, title: 'Equity', color: Colors.blue, chartTitle: '65%', chartValue:50 )
-    ],
-    [
-      ChartData(index: 0, title: 'Cash', color: Colors.green, chartTitle: '25%', chartValue:25 ),
-      ChartData(index: 1, title: 'Unit Trust', color: Colors.blue, chartTitle: '15%', chartValue:15 ),
-      ChartData(index: 2, title: 'Margin Loans', color: Colors.pink, chartTitle: '10%', chartValue:25 ),
-      ChartData(index: 3, title: 'Proven Rock', color: Colors.orange, chartTitle: '30%', chartValue:35 ),
     ]
   ];
 
@@ -71,7 +72,7 @@ class Page extends State<AccountHome>{
   final List<AccountMenu> _accountMenuList = [
     AccountMenu(menu: 'Portfolio', icon: Icons.abc, action: const AccountInfo() ),
     AccountMenu(menu: 'Loans', icon: Icons.abc, action: const Loan() ),
-    AccountMenu(menu: 'Orders\n&\nRequest', icon: Icons.abc, action: const Loan() ),
+    AccountMenu(menu: 'Orders\n&\nRequest', icon: Icons.abc, action: const OrdersAndRequest() ),
     AccountMenu(menu: 'Income\nCalendar', icon: Icons.abc, action: const Events() )
   ];
 
