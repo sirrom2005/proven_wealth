@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
+import 'package:proven_wealth/Common/CommonText.dart';
 import 'package:proven_wealth/Common/MyStyles.dart';
 
 import '../Common/MyColors.dart';
@@ -31,7 +32,10 @@ class Page extends State<Loan>{
           MyAppBar().getSliverAppBar(screenHeight),
           SliverList(
             delegate: SliverChildBuilderDelegate((BuildContext context, int index) {
-                return Text('Coming Soon', style: MyStyles.headerStyle1.copyWith(color: MyColors.red),);
+                return Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 30, 10, 0),
+                  child: Text(CommonText.noLoan, textAlign: TextAlign.center, style: MyStyles.headerStyle2,),
+                );
               },
               childCount: 1,
             )

@@ -32,7 +32,7 @@ class Page extends State<Ipo>{
                   child: Column(
                     children: [
                       Text(CommonText.ipoProText, style: MyStyles.mediumTextStyle2),
-                      MyFormIconTextBox(hintText: 'Enter code', prefixIcon:Icons.numbers,  textInputType: TextInputType.number, onChanged:(){}),
+                      MyFormIconTextBox(hintText: 'Enter code', prefixIcon:Icons.numbers,  textInputType: TextInputType.text, onChanged:(){}),
                     ],
                   ),
                 );
