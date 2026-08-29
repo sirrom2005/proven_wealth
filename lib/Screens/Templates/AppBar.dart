@@ -13,7 +13,7 @@ class MyAppBar
         elevation:0,
         backgroundColor:admin ? Colors.white : Colors.black,
         foregroundColor:admin ? Colors.black : Colors.white,
-        title:title.isEmpty ? Image.asset(admin ? 'lib/assets/images/logo-for-white.png' : 'lib/assets/images/logo.png', width: 120) : Text(title??''),
+        title:title.isEmpty ? Image.asset(admin ? 'lib/assets/images/logo-for-white.png' : 'lib/assets/images/logo.png', width: 120) : Text(title),
         centerTitle: false,
         actions: [
           if(admin)

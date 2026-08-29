@@ -14,9 +14,7 @@ class NewsHeader extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    double screenHeight = size.height;
     double screenWidth = size.width;
-    double safePaddingTop = MediaQuery.of(context).padding.top;
 
     return Padding(
       padding: const EdgeInsets.fromLTRB(5, 5, 5, 0),

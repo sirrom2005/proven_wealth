@@ -19,9 +19,6 @@ class Page extends State<Events>{
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     double screenHeight = size.height;
-    double screenWidth = size.width;
-    double safePaddingTop = MediaQuery.of(context).padding.top;
-    double screenTopHeight = screenHeight/4.0;
 
     return Scaffold(
         backgroundColor: MyColors.appBackGroundColor,

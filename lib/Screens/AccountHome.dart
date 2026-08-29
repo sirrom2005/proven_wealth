@@ -89,7 +89,6 @@ class Page extends State<AccountHome>{
 
     Size size = MediaQuery.of(context).size;
     double screenWidth = size.width;
-    double screenHeight = size.height;
 
     return Scaffold(
         key: scaffoldKey,

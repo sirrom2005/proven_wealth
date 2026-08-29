@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:loading_overlay/loading_overlay.dart';
 import 'package:proven_wealth/Common/CommonText.dart';
 import 'package:proven_wealth/Common/MyStyles.dart';
 

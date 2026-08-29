@@ -2,13 +2,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_overlay/loading_overlay.dart';
 import 'package:proven_wealth/Common/MyStyles.dart';
-import '../Common/CommonText.dart';
 import '../Common/MyColors.dart';
-import '../Models/ChartData.dart';
 import '../Services/page_manager.dart';
 import '../Services/service_locator.dart';
-import 'PieChart.dart';
-import 'Templates/AccountCard.dart';
 import 'Templates/AppBar.dart';
 
 class AccountDetail extends StatefulWidget {

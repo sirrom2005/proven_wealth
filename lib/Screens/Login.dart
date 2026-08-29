@@ -23,9 +23,6 @@ class Login extends StatefulWidget {
 class _Page extends State<Login> with TickerProviderStateMixin
 {
   late final AnimationController _animationController = AnimationController(vsync: this, duration: Duration(milliseconds: getIt<SplashScreen>().action=='logout' ?  0 : 250));
-  late final Animation<double> _logoAnimation = Tween(begin:0.0, end:125.0).animate(_animationController)..addListener(() { });
-  late final Animation<double> _transAnimation = Tween(begin:1.0, end:0.0).animate(_animationController)..addListener(() { });
-  late final Animation<double> _transReversAnimation = Tween(begin:0.0, end:1.0).animate(_animationController)..addListener(() { });
 
   late StreamController<String> emailStreamController;
   TextEditingController emailController = TextEditingController();
